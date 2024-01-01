@@ -42,5 +42,3 @@ const questions = [
         correctAnswer: "Percy Weasley and Rufus Scrimgeor"
     }                      
 ];
-
-console.log(questions[0]);
