@@ -6,11 +6,11 @@ const questionTitle = document.querySelector("#question-title");
 const choicesEl = document.querySelector("#choices");
 
 let timeLeft = 70;
-
+let timerInterval;
 //timer function
 function time() {
     //set timer interval
-    const timerInterval = setInterval(() => {
+    timerInterval = setInterval(() => {
         timeLeft--;
         timeEl.textContent = timeLeft;
 
@@ -46,63 +46,65 @@ start.addEventListener("click", () => {
 
 var i = 0;
 var j = 1;
-//Show questions with delay
-//Iterate through the array
+//function for showing questions and answers
 function showQuestions() {
     questionTitle.textContent = questions[j].question;
     ansOne.textContent = questions[j].answerOne;
     ansTwo.textContent = questions[j].answerTwo;
     ansThree.textContent = questions[j].answerThree;
     ansFour.textContent = questions[j].answerFour;
+
+    if (j > questions.length - 2) {
+        questionsEl.className = "hide";
+        clearInterval(timerInterval);
+    }
 }
+
+//event listeners for questions and answer and incrementing our indexes one we click on the button and show the next set of questions
+//checking if the answer picked is the correct one in the object
 ansOne.addEventListener("click", () => {
     if (ansOne.textContent == questions[i].correctAnswer) {
-        console.log("correct");
         showQuestions();
     } else {
-        console.log("incorrect");
         showQuestions();
+        timeLeft -= 10;
     }
     i++;
     j++;
 })
 ansTwo.addEventListener("click", () => {
     if (ansTwo.textContent == questions[i].correctAnswer) {
-        console.log("correct");
         showQuestions();
     } else {
-        console.log("incorrect");
         showQuestions();
+        timeLeft -= 10;
     }
     i++;
     j++;
 })
 ansThree.addEventListener("click", () => {
     if (ansThree.textContent == questions[i].correctAnswer) {
-        console.log("correct");
         showQuestions();
     } else {
-        console.log("incorrect");
         showQuestions();
+        timeLeft -= 10;
     }
     i++;
     j++;
 })
 ansFour.addEventListener("click", () => {
     if (ansFour.textContent == questions[i].correctAnswer) {
-        console.log("correct");
         showQuestions();
     } else {
-        console.log("incorrect");
         showQuestions();
+        timeLeft -= 10;
     }
     i++;
     j++;
 })
 
-if (j > questions.length) {
-questionsEl.className = "hide";
-}
+//once we get to the last question hide the element
+
 
 
 
