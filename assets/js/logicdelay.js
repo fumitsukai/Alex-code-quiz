@@ -6,11 +6,11 @@ const questionTitle = document.querySelector("#question-title");
 const choicesEl = document.querySelector("#choices");
 
 let timeLeft = 70;
-
+let timerInterval;
 //timer function
 function time() {
     //set timer interval
-    const timerInterval = setInterval(() => {
+    timerInterval = setInterval(() => {
         timeLeft--;
         timeEl.textContent = timeLeft;
 
@@ -53,6 +53,9 @@ function showQuestions() {
         i++;
         if (i < questions.length) {
             setTimeout(delayedOutput, 10000);
+        } else {
+            questionsEl.className = "hide";
+            clearInterval(timerInterval);
         }
     }
     delayedOutput();

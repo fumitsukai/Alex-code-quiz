@@ -4,6 +4,10 @@ const timeEl = document.querySelector("#time");
 const questionsEl = document.querySelector("#questions");
 const questionTitle = document.querySelector("#question-title");
 const choicesEl = document.querySelector("#choices");
+const endScreen = document.querySelector("#end-screen");
+const sumbitBtn = document.querySelector("#submit");
+const initialsText = document.querySelector("#initials");
+const finalScore = document.querySelector("#final-score");
 
 let timeLeft = 70;
 let timerInterval;
@@ -53,10 +57,14 @@ function showQuestions() {
     ansTwo.textContent = questions[j].answerTwo;
     ansThree.textContent = questions[j].answerThree;
     ansFour.textContent = questions[j].answerFour;
-
+    //when we reach the end hide the questionsEl and clear the interval
     if (j > questions.length - 2) {
         questionsEl.className = "hide";
         clearInterval(timerInterval);
+        //show the form
+        endScreen.classList.remove("hide");
+        //show final score
+        finalScore.textContent = timeLeft;
     }
 }
 
@@ -103,8 +111,14 @@ ansFour.addEventListener("click", () => {
     j++;
 })
 
-//once we get to the last question hide the element
+//store initials and score once the submit button is clicked and clear the input field
 
+ sumbitBtn.addEventListener("click", (e) => {
+     e.preventDefault();
+     localStorage.setItem("Initials", JSON.stringify(initialsText.value));
+     localStorage.setItem("score", timeLeft);
+     initialsText.value = "";
+ })
 
 
 
