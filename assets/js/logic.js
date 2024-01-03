@@ -20,15 +20,6 @@ function time() {
     }, 1000);
 };
 
-//make landing page dissapear once the start button is clicked
-start.addEventListener("click", () => {
-    startScreen.style.display = "none";
-    //start timer as soon as the start button is clicked and show questions
-    time();
-    questionsEl.classList.remove("hide");
-    showQuestions();
-});
-
 //create buttons for each answer
 const ansOne = document.createElement("button");
 const ansTwo = document.createElement("button");
@@ -39,64 +30,78 @@ choicesEl.appendChild(ansTwo);
 choicesEl.appendChild(ansThree);
 choicesEl.appendChild(ansFour);
 
+//make landing page dissapear once the start button is clicked
+start.addEventListener("click", () => {
+    startScreen.style.display = "none";
+    //start timer as soon as the start button is clicked and show questions
+    time();
+    questionsEl.classList.remove("hide");
+    //show first question once the button is clicked
+    questionTitle.textContent = questions[0].question;
+    ansOne.textContent = questions[0].answerOne;
+    ansTwo.textContent = questions[0].answerTwo;
+    ansThree.textContent = questions[0].answerThree;
+    ansFour.textContent = questions[0].answerFour;
+});
+
+var i = 0;
+var j = 1;
 //Show questions with delay
 //Iterate through the array
 function showQuestions() {
-    var i = 0;
-    var j = 0;
-    function delayedOutput() {
-        questionTitle.textContent = questions[i].question;
-        ansOne.textContent = questions[i].answerOne;
-        ansTwo.textContent = questions[i].answerTwo;
-        ansThree.textContent = questions[i].answerThree;
-        ansFour.textContent = questions[i].answerFour;
-        i++;
-        if (i < questions.length) {
-            setTimeout(delayedOutput, 10000);
-        }
+    questionTitle.textContent = questions[j].question;
+    ansOne.textContent = questions[j].answerOne;
+    ansTwo.textContent = questions[j].answerTwo;
+    ansThree.textContent = questions[j].answerThree;
+    ansFour.textContent = questions[j].answerFour;
+}
+ansOne.addEventListener("click", () => {
+    if (ansOne.textContent == questions[i].correctAnswer) {
+        console.log("correct");
+        showQuestions();
+    } else {
+        console.log("incorrect");
+        showQuestions();
     }
-    delayedOutput();
-    ansOne.addEventListener("click", () => {
-        if (ansOne.textContent == questions[j].correctAnswer) {
-            console.log("correct");
-            delayedOutput()
-        } else {
-            console.log("incorrect");
-            delayedOutput();
-            clearInterval(timerInterval);
-        }
-        j++;
-    })
-    ansTwo.addEventListener("click", () => {
-        if (ansTwo.textContent == questions[j].correctAnswer) {
-            console.log("correct");
-            delayedOutput()
-        } else {
-            console.log("incorrect");
-            delayedOutput();
-        }
-        j++;
-    })
-    ansThree.addEventListener("click", () => {
-        if (ansThree.textContent == questions[j].correctAnswer) {
-            console.log("correct");
-            delayedOutput()
-        } else {
-            console.log("incorrect");
-            delayedOutput();
-        }
-        j++;
-    })
-    ansFour.addEventListener("click", () => {
-        if (ansFour.textContent == questions[j].correctAnswer) {
-            console.log("correct");
-            delayedOutput()
-        } else {
-            console.log("incorrect");
-            delayedOutput();
-        }
-        j++;
-    })
+    i++;
+    j++;
+})
+ansTwo.addEventListener("click", () => {
+    if (ansTwo.textContent == questions[i].correctAnswer) {
+        console.log("correct");
+        showQuestions();
+    } else {
+        console.log("incorrect");
+        showQuestions();
+    }
+    i++;
+    j++;
+})
+ansThree.addEventListener("click", () => {
+    if (ansThree.textContent == questions[i].correctAnswer) {
+        console.log("correct");
+        showQuestions();
+    } else {
+        console.log("incorrect");
+        showQuestions();
+    }
+    i++;
+    j++;
+})
+ansFour.addEventListener("click", () => {
+    if (ansFour.textContent == questions[i].correctAnswer) {
+        console.log("correct");
+        showQuestions();
+    } else {
+        console.log("incorrect");
+        showQuestions();
+    }
+    i++;
+    j++;
+})
+
+if (j > questions.length) {
+questionsEl.className = "hide";
 }
 
 
@@ -111,17 +116,16 @@ function showQuestions() {
 
 
 
-
-    //  function pickAnswer(ans) {
-    //      ans.addEventListener("click", () => {
-    //          if (ans.textContent == questions[j].correctAnswer) {
-    //              delayedOutput();
-    //              console.log("correct!");
-    //          } else {
-    //              delayedOutput();
-    //              timeLeft -= 10;
-    //              console.log("incorrect");
-    //          }
-    //          j++;
-    //      });
-    //  }
+//  function pickAnswer(ans) {
+//      ans.addEventListener("click", () => {
+//          if (ans.textContent == questions[j].correctAnswer) {
+//              delayedOutput();
+//              console.log("correct!");
+//          } else {
+//              delayedOutput();
+//              timeLeft -= 10;
+//              console.log("incorrect");
+//          }
+//          j++;
+//      });
+//  }
