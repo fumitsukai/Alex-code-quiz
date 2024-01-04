@@ -65,7 +65,7 @@ function showQuestions() {
 
 //add some delay before showing the next question
 function timeOut() {
-    setTimeout(showQuestions, 1500);
+    setTimeout(showQuestions, 1000);
 }
 //event listeners for questions and answer and incrementing our indexes one we click on the button and show the next set of questions
 //checking if the answer picked is the correct one in the object
@@ -87,7 +87,7 @@ ansFour.addEventListener("click", () => {
 sumbitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.setItem("Initials", JSON.stringify(initialsText.value));
-    localStorage.setItem("score", timeLeft);
+    localStorage.setItem("Score", timeLeft);
     initialsText.value = "";
 })
 
@@ -131,16 +131,3 @@ function check(ans) {
 
 
 
-//  function pickAnswer(ans) {
-//      ans.addEventListener("click", () => {
-//          if (ans.textContent == questions[j].correctAnswer) {
-//              delayedOutput();
-//              console.log("correct!");
-//          } else {
-//              delayedOutput();
-//              timeLeft -= 10;
-//              console.log("incorrect");
-//          }
-//          j++;
-//      });
-//  }
