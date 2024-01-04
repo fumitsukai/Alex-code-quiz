@@ -41,24 +41,19 @@ start.addEventListener("click", () => {
     time();
     questionsEl.classList.remove("hide");
     //show first question once the button is clicked
-    questionTitle.textContent = questions[0].question;
-    ansOne.textContent = questions[0].answerOne;
-    ansTwo.textContent = questions[0].answerTwo;
-    ansThree.textContent = questions[0].answerThree;
-    ansFour.textContent = questions[0].answerFour;
+    showQuestions();
 });
 
 var i = 0;
-var j = 1;
 //function for showing questions and answers
 function showQuestions() {
-    questionTitle.textContent = questions[j].question;
-    ansOne.textContent = questions[j].answerOne;
-    ansTwo.textContent = questions[j].answerTwo;
-    ansThree.textContent = questions[j].answerThree;
-    ansFour.textContent = questions[j].answerFour;
+    questionTitle.textContent = questions[i].question;
+    ansOne.textContent = questions[i].answerOne;
+    ansTwo.textContent = questions[i].answerTwo;
+    ansThree.textContent = questions[i].answerThree;
+    ansFour.textContent = questions[i].answerFour;
     //when we reach the end hide the questionsEl and clear the interval
-    if (j > questions.length - 2) {
+    if (i > questions.length - 2 || timeLeft == 0) {
         questionsEl.className = "hide";
         clearInterval(timerInterval);
         //show the form
@@ -68,66 +63,70 @@ function showQuestions() {
     }
 }
 
+//add some delay before showing the next question
+function timeOut() {
+    setTimeout(showQuestions, 1500);
+}
 //event listeners for questions and answer and incrementing our indexes one we click on the button and show the next set of questions
 //checking if the answer picked is the correct one in the object
 ansOne.addEventListener("click", () => {
-    if (ansOne.textContent == questions[i].correctAnswer) {
-        showQuestions();
-    } else {
-        showQuestions();
-        timeLeft -= 10;
-    }
-    i++;
-    j++;
+    check(ansOne);
 })
 ansTwo.addEventListener("click", () => {
-    if (ansTwo.textContent == questions[i].correctAnswer) {
-        showQuestions();
-    } else {
-        showQuestions();
-        timeLeft -= 10;
-    }
-    i++;
-    j++;
+    check(ansTwo);
 })
 ansThree.addEventListener("click", () => {
-    if (ansThree.textContent == questions[i].correctAnswer) {
-        showQuestions();
-    } else {
-        showQuestions();
-        timeLeft -= 10;
-    }
-    i++;
-    j++;
+    check(ansThree);
 })
 ansFour.addEventListener("click", () => {
-    if (ansFour.textContent == questions[i].correctAnswer) {
-        showQuestions();
-    } else {
-        showQuestions();
-        timeLeft -= 10;
-    }
-    i++;
-    j++;
+    check(ansFour);
 })
 
 //store initials and score once the submit button is clicked and clear the input field
 
- sumbitBtn.addEventListener("click", (e) => {
-     e.preventDefault();
-     localStorage.setItem("Initials", JSON.stringify(initialsText.value));
-     localStorage.setItem("score", timeLeft);
-     initialsText.value = "";
- })
+sumbitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.setItem("Initials", JSON.stringify(initialsText.value));
+    localStorage.setItem("score", timeLeft);
+    initialsText.value = "";
+})
 
 
 
+//function to add a correct <p> element for the answers
 
+function showCorrect() {
+    const pEl = document.createElement("p");
+    pEl.textContent = "Correct!";
+    questionsEl.appendChild(pEl);
+    setTimeout(() => {
+        pEl.textContent = "";
+    }, 1500);
+}
 
+//function to add a incorrect <p> element for the answers
 
+function showIncorrect() {
+    const pEl = document.createElement("p");
+    pEl.textContent = "Incorrect!";
+    questionsEl.appendChild(pEl);
+    setTimeout(() => {
+        pEl.textContent = "";
+    }, 1500);
+}
 
-
-
+//function to check answer against the correct one in the object
+function check(ans) {
+    if (ans.textContent == questions[i].correctAnswer) {
+        showCorrect();
+        timeOut();
+    } else {
+        showIncorrect();
+        timeOut();
+        timeLeft -= 10;
+    }
+    i++;
+}
 
 
 

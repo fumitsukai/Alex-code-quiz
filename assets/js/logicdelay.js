@@ -61,7 +61,7 @@ function showQuestions() {
     delayedOutput();
     ansOne.addEventListener("click", () => {
         if (ansOne.textContent == questions[j].correctAnswer) {
-            console.log("correct");
+            showCorrect();
             delayedOutput()
         } else {
             console.log("incorrect");
@@ -102,6 +102,15 @@ function showQuestions() {
     })
 }
 
+//function to add a correct <p> element for the answers
+
+function showCorrect() {
+    const pEl = document.createElement("p");
+    pEl.textContent = "Correct!";
+    questionsEl.appendChild(pEl);
+}
+
+//function to add a incorrect <p> element for the answers
 
 
 
@@ -115,16 +124,3 @@ function showQuestions() {
 
 
 
-    //  function pickAnswer(ans) {
-    //      ans.addEventListener("click", () => {
-    //          if (ans.textContent == questions[j].correctAnswer) {
-    //              delayedOutput();
-    //              console.log("correct!");
-    //          } else {
-    //              delayedOutput();
-    //              timeLeft -= 10;
-    //              console.log("incorrect");
-    //          }
-    //          j++;
-    //      });
-    //  }

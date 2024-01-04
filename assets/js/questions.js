@@ -40,7 +40,7 @@ const questions = [
         answerThree: "Percy Weasley and Rufus Scrimgeor",
         answerFour: "Cornelius Fudge and Percy Weasley",
         correctAnswer: "Percy Weasley and Rufus Scrimgeor"
-    },                     
+    },
     {
         question: "",
         answerOne: "",
@@ -48,5 +48,5 @@ const questions = [
         answerThree: "",
         answerFour: "",
         correctAnswer: "1"
-    }                      
+    }
 ];
