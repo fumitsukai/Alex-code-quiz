@@ -1,11 +1,26 @@
 const highscoresEl = document.querySelector("#highscores");
+const clear = document.querySelector("#clear");
 
-//show highscores from storage
-const player =  JSON.parse(localStorage.getItem("Initials"));
-const scoreFinal = JSON.parse(localStorage.getItem("Score"));
+//get items from local storage
 
-//create list elements for the scores and sort by score
+const storageGet = JSON.parse(localStorage.getItem('player'));
 
-const liEl = document.createElement("li");
-liEl.textContent = player;
-highscoresEl.appendChild(liEl);
+
+
+ //create list elements for the scores and sort by score
+ //loop through array
+ for (score in storageGet) {
+ const liEl = document.createElement("li");
+ liEl.className = "list-element";
+ liEl.textContent = storageGet[score].initials + " - " + storageGet[score].score;
+ highscoresEl.appendChild(liEl);
+  }
+
+
+//clear highscores
+clear.addEventListener('click', () => {
+    localStorage.clear();
+    document.querySelectorAll(".list-element").forEach (e => e.remove());
+})
+
+ 

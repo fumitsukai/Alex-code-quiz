@@ -84,14 +84,27 @@ ansFour.addEventListener("click", () => {
 
 //store initials and score once the submit button is clicked and clear the input field
 
-sumbitBtn.addEventListener("click", (e) => {
+sumbitBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    localStorage.setItem("Initials", JSON.stringify(initialsText.value));
-    localStorage.setItem("Score", timeLeft);
-    initialsText.value = "";
+
+    const player = {
+        initials: initialsText.value.trim(),
+        score: timeLeft
+    };
+
+    saveFormData(player);
 })
 
+function saveFormData(player) {
+//get items from storage and store in array and add it to local storage
+    const scoresArr = JSON.parse(localStorage.getItem('player')) || [];
 
+    scoresArr.push(player);
+
+    localStorage.setItem('player', JSON.stringify(scoresArr));
+
+    initialsText.value = "";
+}
 
 //function to add a correct <p> element for the answers
 
@@ -101,7 +114,7 @@ function showCorrect() {
     questionsEl.appendChild(pEl);
     setTimeout(() => {
         pEl.textContent = "";
-    }, 1500);
+    }, 1000);
 }
 
 //function to add a incorrect <p> element for the answers
@@ -112,7 +125,7 @@ function showIncorrect() {
     questionsEl.appendChild(pEl);
     setTimeout(() => {
         pEl.textContent = "";
-    }, 1500);
+    }, 1000);
 }
 
 //function to check answer against the correct one in the object
