@@ -96,7 +96,7 @@ sumbitBtn.addEventListener('click', (e) => {
 })
 
 function saveFormData(player) {
-//get items from storage and store in array and add it to local storage
+    //get items from storage and store in array and add it to local storage
     const scoresArr = JSON.parse(localStorage.getItem('player')) || [];
 
     scoresArr.push(player);
